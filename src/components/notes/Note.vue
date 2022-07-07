@@ -3,7 +3,7 @@
         <base-card>
             <header>
                 <h3>{{ note.name }}</h3>
-                <button>Delete</button>
+                <base-button mode="flat">Delete</base-button>
             </header>
             <p>
                 {{ note.description }}
@@ -16,8 +16,10 @@
 </template>
 
 <script>
+import BaseButton from '../UI/BaseButton.vue'
 
 export default {
+  components: { BaseButton },
     props: {
         note: {
             type: Object,

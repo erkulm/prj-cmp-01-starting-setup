@@ -7,7 +7,8 @@
 </template>
 <script>
 import Note from "./components/notes/Note.vue";
-import TheHeader from './components/layouts/TheHeader.vue'
+import TheHeader from './components/layouts/TheHeader.vue';
+
 export default {
     data() {
         return {
