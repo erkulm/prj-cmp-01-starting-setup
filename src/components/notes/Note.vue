@@ -1,21 +1,22 @@
 <template>
     <li>
-        <div>
+        <base-card>
             <header>
-                <h3>{{note.name}}</h3>
+                <h3>{{ note.name }}</h3>
                 <button>Delete</button>
             </header>
-        </div>
-        <p>
-           {{note.description}}
-        </p>
-        <nav v-if="note.link !== undefined">
-            <a :href="note.link">Link</a>
-        </nav>
+            <p>
+                {{ note.description }}
+            </p>
+            <nav v-if="note.link !== undefined">
+                <a :href="note.link">Link</a>
+            </nav>
+        </base-card>
     </li>
 </template>
 
 <script>
+
 export default {
     props: {
         note: {
@@ -28,32 +29,32 @@ export default {
 
 <style scoped>
 li {
-  margin: auto;
-  max-width: 40rem;
+    margin: auto;
+    max-width: 40rem;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h3 {
-  font-size: 1.25rem;
-  margin: 0.5rem 0;
+    font-size: 1.25rem;
+    margin: 0.5rem 0;
 }
 
 p {
-  margin: 0.5rem 0;
+    margin: 0.5rem 0;
 }
 
 a {
-  text-decoration: none;
-  color: #ce5c00;
+    text-decoration: none;
+    color: #ce5c00;
 }
 
 a:hover,
 a:active {
-  color: #c89300;
+    color: #c89300;
 }
 </style>

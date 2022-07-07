@@ -1,11 +1,13 @@
 <template>
     <h2 :value="appname"></h2>
+    <the-header :title="appname"></the-header>
     <ul>
         <Note v-for="note in dummyNotes" :key="note.id" :note="note"></Note>
     </ul>
 </template>
 <script>
 import Note from "./components/notes/Note.vue";
+import TheHeader from './components/layouts/TheHeader.vue'
 export default {
     data() {
         return {
@@ -30,7 +32,7 @@ export default {
             ]
         };
     },
-    components: { Note }
+    components: { Note , TheHeader}
 }
 </script>
 
