@@ -1,18 +1,18 @@
 <template>
     <base-card>
-    <h2>Add New Note</h2>
-        <form>
+        <h2>Add New Note</h2>
+        <form @submit.prevent="submitNewNote">
             <div class="form-control">
                 <label for="name">Name:</label>
-                <input type="text" name="name" id="name" />
+                <input type="text" name="name" id="name" ref="nameInput" />
             </div>
             <div class="form-control">
                 <label for="details">Details:</label>
-                <textarea rows="4" name="details" id="details" />
+                <textarea rows="4" name="details" id="details" ref="detailsInput" />
             </div>
             <div class="form-control">
                 <label for="link">Link:</label>
-                <input type="urll" name="link" id="link" />
+                <input type="urll" name="link" id="link" ref="linkInput" />
             </div>
             <div>
                 <base-button type="submit">Add Note</base-button>
@@ -25,7 +25,16 @@
 import BaseButton from '../UI/BaseButton.vue'
 export default {
     components: { BaseButton },
+    inject: ['addNewNote'],
+    methods: {
+        submitNewNote() {
+            const name = this.$refs.nameInput.value;
+            const details = this.$refs.detailsInput.value;
+            const link = this.$refs.linkInput.value;
 
+            this.addNewNote(name, details, link);
+        }
+    }
 }
 </script>
 <style scoped>

@@ -3,7 +3,9 @@
         <base-button :mode="storedNotesButtonMode" @click="setSelectedTab('add-note')">New Note</base-button>
         <base-button :mode="addNoteButtonMode" @click="setSelectedTab('stored-notes')">Notes</base-button>
     </base-card>
-    <component :is="selectedTab"></component>
+    <keep-alive>
+        <component :is="selectedTab"></component>
+    </keep-alive>
 </template>
 
 <script>
@@ -17,24 +19,7 @@ export default {
     },
     data() {
         return {
-            selectedTab: 'stored-notes'
-        };
-    },
-    computed: {
-        storedNotesButtonMode() {
-            return this.selectedTab === 'stored-notes' ? null : 'flat';
-        },
-        addNoteButtonMode() {
-            return this.selectedTab === 'add-note' ? null : 'flat';
-        }
-    },
-    methods: {
-        setSelectedTab(tab) {
-            debugger;
-            this.selectedTab = tab;
-        }
-    }, provide() {
-        return {
+            selectedTab: 'stored-notes',
             notes: [
                 {
                     id: 1,
@@ -52,15 +37,44 @@ export default {
                     name: "Credit Payment",
                     description: "Credit payment is due on 5fth of august"
                 }
-            ]
+            ],
+        };
+    },
+    computed: {
+        storedNotesButtonMode() {
+            return this.selectedTab === 'stored-notes' ? null : 'flat';
+        },
+        addNoteButtonMode() {
+            return this.selectedTab === 'add-note' ? null : 'flat';
+        }
+    },
+    methods: {
+        setSelectedTab(tab) {
+            debugger;
+            this.selectedTab = tab;
+        },
+        addNewNote(name, description, link) {
+            const newNote = {
+                id: new Date().toISOString(),
+                name: name,
+                description: description,
+                link: link,
+            };
+            this.notes.unshift(newNote);
+            this.selectedTab = 'stored-notes';
+        }
+    }, provide() {
+        return {
+            addNewNote: this.addNewNote,
+            notes : this.notes,
         }
     }
 }
 </script>
 
 <style scoped>
-    #seletedTab{
-       display: flex;
-  justify-content: center;
-    }
+#seletedTab {
+    display: flex;
+    justify-content: center;
+}
 </style>
