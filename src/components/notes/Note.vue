@@ -3,7 +3,7 @@
         <base-card>
             <header>
                 <h3>{{ note.name }}</h3>
-                <base-button mode="flat">Delete</base-button>
+                <base-button mode="flat" @click="removeNoteById(note.id)">Delete</base-button>
             </header>
             <p>
                 {{ note.description }}
@@ -26,6 +26,12 @@ export default {
             required: true
         }
     },
+    inject:['removeNote'],
+    methods:{
+        removeNoteById(id){
+            this.removeNote(id);
+        }
+    }
 }
 </script>
 

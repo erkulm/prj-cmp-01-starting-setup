@@ -10,7 +10,7 @@ import TheNotes from './components/notes/TheNotes.vue'
 export default {
     data() {
         return {
-            appname: "notes",
+            appname: "notes app",
         };
     },
     components: {  TheHeader, TheNotes}

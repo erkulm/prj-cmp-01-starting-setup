@@ -62,11 +62,15 @@ export default {
             };
             this.notes.unshift(newNote);
             this.selectedTab = 'stored-notes';
+        },
+        removeNote(id) {
+            this.notes.splice(this.notes.findIndex(n => n.id === id), 1);
         }
     }, provide() {
         return {
             addNewNote: this.addNewNote,
-            notes : this.notes,
+            notes: this.notes,
+            removeNote: this.removeNote,
         }
     }
 }
