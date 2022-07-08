@@ -1,4 +1,13 @@
 <template>
+    <base-dialog title="Invalid Input" v-if="formIsInvalid" @close="setFormValid">
+        <template #default>
+            <p>One or more of input fields are empty</p>
+            <p>Please make sure you enter all fields except link</p>
+        </template>
+        <template #actions>
+            <base-button @click="setFormValid">Okay</base-button>
+        </template>
+    </base-dialog>
     <base-card>
         <h2>Add New Note</h2>
         <form @submit.prevent="submitNewNote">
@@ -23,16 +32,33 @@
 
 <script>
 import BaseButton from '../UI/BaseButton.vue'
+import BaseDialog from '../UI/BaseDialog.vue';
 export default {
-    components: { BaseButton },
+    data() {
+        return {
+            formIsInvalid: false,
+        }
+    },
+    components: { BaseButton, BaseDialog },
     inject: ['addNewNote'],
     methods: {
         submitNewNote() {
-            const name = this.$refs.nameInput.value;
-            const details = this.$refs.detailsInput.value;
-            const link = this.$refs.linkInput.value;
+            const name = this.$refs.nameInput.value.trim();
+            const details = this.$refs.detailsInput.value.trim();
+            const link = this.$refs.linkInput.value.trim();
+
+            if (name === '' || details === '') {
+                this.formIsInvalid = true;
+                return;
+            }
 
             this.addNewNote(name, details, link);
+            this.$refs.nameInput.value = '';
+            this.$refs.detailsInput.value = '';
+            this.$refs.linkInput.value = '';
+        },
+        setFormValid(){
+            this.formIsInvalid = false;
         }
     }
 }
