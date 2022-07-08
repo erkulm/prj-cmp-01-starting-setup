@@ -1,22 +1,24 @@
 <template>
-    <div @click="$emit('close')"></div>
-    <dialog open>
-        <header>
-            <h2>
-                <slot name="header">
-                    <h2>{{ title }}</h2>
+    <teleport to="body">
+        <div @click="$emit('close')"></div>
+        <dialog open>
+            <header>
+                <h2>
+                    <slot name="header">
+                        <h2>{{ title }}</h2>
+                    </slot>
+                </h2>
+            </header>
+            <section>
+                <slot></slot>
+            </section>
+            <menu>
+                <slot name="actions">
+                    <base-button @click="$emit('close')"></base-button>
                 </slot>
-            </h2>
-        </header>
-        <section>
-            <slot></slot>
-        </section>
-        <menu>
-            <slot name="actions">
-                <base-button @click="$emit('close')"></base-button>
-            </slot>
-        </menu>
-    </dialog>
+            </menu>
+        </dialog>
+    </teleport>
 </template>
 <script>
 import BaseButton from './BaseButton.vue'
