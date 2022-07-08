@@ -1,39 +1,19 @@
 <template>
     <h2 :value="appname"></h2>
     <the-header :title="appname"></the-header>
-    <ul>
-        <Note v-for="note in dummyNotes" :key="note.id" :note="note"></Note>
-    </ul>
+    <the-notes></the-notes>
 </template>
 <script>
-import Note from "./components/notes/Note.vue";
 import TheHeader from './components/layouts/TheHeader.vue';
+import TheNotes from './components/notes/TheNotes.vue'
 
 export default {
     data() {
         return {
             appname: "notes",
-            dummyNotes: [
-                {
-                    id: 1,
-                    name: "Credit Card Payment",
-                    description: "Bonus card must be payed by 7th of July"
-                },
-                {
-                    id: 2,
-                    name: "Credit Card Payment",
-                    description: "World card must be payed by 8th of July",
-                    link: "https://www.garantibbva.com.tr/dijital-bankacilik/internet-bankaciligi"
-                },
-                {
-                    id: 3,
-                    name: "Credit Payment",
-                    description: "Credit payment is due on 5fth of august"
-                }
-            ]
         };
     },
-    components: { Note , TheHeader}
+    components: {  TheHeader, TheNotes}
 }
 </script>
 
@@ -52,11 +32,4 @@ body {
     margin: 0;
 }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  margin: auto;
-  max-width: 40rem;
-}
 </style>
